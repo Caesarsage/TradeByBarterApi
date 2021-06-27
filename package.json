@@ -1,0 +1,32 @@
+{
+  "name": "trade-by-barter-pjt-09-be",
+  "version": "1.0.0",
+  "description": "An app where an individual can put their available resources to be swapped by corresponding that has the same intention, for instance, I have a Timberland shoe and I want to trade it for a sweatshirt and maybe sunglasss",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuri-training/Trade-by-Barter-pjt-09-be.git"
+  },
+  "keywords": [
+    "trade-by-barter",
+    "barter",
+    "trade"
+  ],
+  "author": "team-09",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zuri-training/Trade-by-Barter-pjt-09-be/issues"
+  },
+  "homepage": "https://github.com/zuri-training/Trade-by-Barter-pjt-09-be#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.15"
+  }
+}
