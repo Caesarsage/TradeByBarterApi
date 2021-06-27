@@ -1,9 +1,11 @@
 // chalk is a package that just add colors to output, nothing special. Don't get confuse with it.
 const chalk = require("chalk");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 module.exports.db = async () => {
   try {
+    console.log(process.env.MONGO_URL);
     const connectMongoose = await mongoose.connect(
       process.env.MONGO_URL,
       {
