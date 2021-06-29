@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express");
 const { db } = require("./database/db");
+const authRouter = require("./routes/authRoute");
 
 const app = express();
 
@@ -12,10 +13,8 @@ db();
 app.use(express.json());
 
 
-app.get('/', (req,res)=>{
-  res.status(200).send("welcome to zuri backend team 09 testing")
-})
 // router middleware
+app.use('/api/auth', authRouter);
 
 // Port
 const PORT = process.env.PORT || 8080;

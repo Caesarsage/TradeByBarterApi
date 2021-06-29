@@ -10,6 +10,10 @@ const userSchema = new Schema({
     type:String,
     required: true
   },
+  username:{
+    type: String,
+    required: true
+  },
   email:{
     type: String,
     required: true,
@@ -18,13 +22,16 @@ const userSchema = new Schema({
   phoneNumber:{
     type: Number,
     required: true,
-    min: 7
+    min: [7, "number must not start with 0 and less than 7 digit"]
   },
   avatar:{
     type: String,
     default:""
   },
   location:{
+    type: String
+  },
+  password:{
     type: String
   },
   role: {
