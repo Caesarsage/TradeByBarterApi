@@ -4,45 +4,49 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
   },
   lastName: {
-    type:String,
-    required: true
-  },
-  username:{
-    type: String,
-    required: true
-  },
-  email:{
     type: String,
     required: true,
-    unique: true
   },
-  phoneNumber:{
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: [true,"Please enter an email address"],
+    unique: true,
+    match: [
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      "Please provide a valid mail",
+    ],
+  },
+  phoneNumber: {
     type: Number,
     required: true,
-    min: [7, "number must not start with 0 and less than 7 digit"]
+    minlength: [7, "number must not start with 0 and less than 7 digit"],
   },
-  avatar:{
+  avatar: {
     type: String,
-    default:""
+    default: "",
   },
-  location:{
-    type: String
+  location: {
+    type: String,
   },
-  password:{
-    type: String
+  password: {
+    type: String,
   },
   role: {
     type: String,
-    enum:['admin', 'regular'],
-    default: 'regular'
+    enum: ["admin", "regular"],
+    default: "regular",
   },
-  isAdmin:{
+  isAdmin: {
     type: Boolean,
-    default: false
-  } 
+    default: false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
