@@ -10,16 +10,16 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  image:{
-    type: String
+  image: {
+    type: String,
   },
   productLocation: {
     type: String,
-    required: true
+    required: true,
   },
   quantity: {
     type: Number,
-    required: true
+    required: true,
   },
   worth: {
     type: Number,
@@ -27,18 +27,20 @@ const productSchema = new Schema({
   location: {
     type: String,
   },
-  category:{
-    type:String,
-    enum:["Men's Fashion", "Women's Fashion", "Phones and Tablets", " Appliances", "Electronics", "Homewares","trades near me", "others"]
-  },
-  uploader:{
+  category: {
     type: Schema.Types.ObjectId,
-    ef: 'User'
+    ref: "Category",
   },
-  reviews:[{
+  uploader: {
     type: Schema.Types.ObjectId,
-    ref: "Review"
-  }]
+    ref: "User",
+  },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 const Product = mongoose.model("Product", productSchema);
