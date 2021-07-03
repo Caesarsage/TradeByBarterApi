@@ -34,8 +34,6 @@ module.exports.register = async(req,res, next)=>{
         username: user.username,
         email : user.email,
         phoneNumber : user.phoneNumber,
-        avatar : user.avatar ,
-        location : user.location ,
         role : user.role ,
         isAdmin : user.isAdmin,
       },
@@ -45,10 +43,10 @@ module.exports.register = async(req,res, next)=>{
      if (token)
        return res
          .status(200)
-         .json({ msg: "login successfully", data: user, token });
+         .json({ msg: "register successfully", data: user, token });
 
   } catch (error) {
-    res.status(500).json({ msg: "server error", data: error });
+    res.status(500).json({ msg: "error", data: error });
   }
 }
 
