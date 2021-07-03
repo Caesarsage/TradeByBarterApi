@@ -8,6 +8,7 @@ const reviewRouter = require("./routes/reviewRoute");
 const productRouter = require("./routes/productRoute");
 const errorHandler = require("./middlewares/error");
 const ErrorResponse = require("./utils/errorResponse");
+const userRouter = require("./routes/userRoutes");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json())
 
 // router middleware
 app.use('/api/auth', authRouter);
+app.use("/api/user", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/products/:id/reviews", reviewRouter);
 

@@ -5,8 +5,6 @@ const reviews = require("../controllers/reviewController");
 
 router.post("/", reviews.createReview);
 
-router.delete(
-  "/:reviewId",reviews.deleteReview
-);
+router.delete("/:reviewId", reviews.deleteReview);
 
 module.exports = router;
