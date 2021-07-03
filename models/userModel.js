@@ -4,46 +4,82 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
   },
   lastName: {
-    type:String,
-    required: true
-  },
-  username:{
-    type: String,
-    required: true
-  },
-  email:{
     type: String,
     required: true,
-    unique: true
   },
-  phoneNumber:{
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: [true, "Please provide an email"],
+    unique: true,
+    match: [
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      "Please provide a valid mail",
+    ]
+  },
+  phoneNumber: {
     type: Number,
     required: true,
-    min: [7, "number must not start with 0 and less than 7 digit"]
+    min: [7, "number must not start with 0 and less than 7 digit"],
   },
-  avatar:{
+  avatar: {
     type: String,
-    default:""
+    default: "",
   },
-  location:{
-    type: String
+  location: {
+    type: String,
   },
-  password:{
-    type: String
+  password: {
+    type: String,
+    required: [true, "Please add a password"],
+    minlength: 6,
+    select: false,
   },
   role: {
     type: String,
-    enum:['admin', 'regular'],
-    default: 'regular'
+    enum: ["admin", "regular"],
+    default: "regular",
   },
-  isAdmin:{
+  isAdmin: {
     type: Boolean,
-    default: false
-  } 
+    default: false,
+  },
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
 });
+
+// hash the password
+UserSchema.pre("save", async function(next){
+  if(!this.isModified("password")){
+    next()
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt)
+  next();
+});
+
+// create a match password method
+UserSchema.methods.matchPasswords = async function(password){
+  return await bcrypt.compare(password, this.password);
+}
+
+// generate reset password token
+
+UserSchema.methods.getRestPasswordToken = function(){
+  const resetToken = crypto.randomBytes(20).toString("hex")
+
+  this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+  this.resetPasswordExpire = Date.now() + 10 * (60*1000);
+  return resetToken
+}
+
 
 const User = mongoose.model("User", userSchema);
 

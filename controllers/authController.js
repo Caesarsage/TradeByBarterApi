@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
-module.exports.register = async(req,res)=>{
+module.exports.register = async(req,res, next)=>{
   try {
     const {firstName, lastName, email, phoneNumber, username, avatar, location, role,password, isAdmin} = req.body;
     // checking for email and username uniqueness
@@ -11,9 +11,6 @@ module.exports.register = async(req,res)=>{
     uniqueEmail && res.status(401).json({ msg: "email already exist", data: null });
     uniqueUsername && res.status(401).json({ msg: "username already exist", data: null });
 
-    // hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
     // create a new user
     const user = await User.create({
       firstName,
@@ -25,7 +22,7 @@ module.exports.register = async(req,res)=>{
       location,
       role,
       isAdmin,
-      password: hashedPassword
+      password
     });
 
     // create a token
@@ -55,13 +52,13 @@ module.exports.register = async(req,res)=>{
   }
 }
 
-module.exports.login = async (req, res) => {
+module.exports.login = async (req, res, next) => {
   try {
     const { password, username, isAdmin } = req.body;
     const user = await User.findOne({ username });
     !user && res.status(401).json({ msg: "user not found", data: null });
 
-    const match = await bcrypt.compare(password, user.password);
+    const match = await user.matchPasswords(password);
     !match && res.status(401).json({ msg: "incorrect credential", data: null });
 
     const token = jwt.sign(
@@ -88,3 +85,31 @@ module.exports.login = async (req, res) => {
     res.status(500).json({ msg: "server error", data: error });
   }
 };
+
+module.exports.forget = async (req,res,next)=>{
+  const {email} = req.body;
+
+  try {
+    const user = await User.findOne({email});
+    if(!user){
+      return res.status(404).json({msg:"email could not be sent", data:null})
+    }
+
+    const resetToken = user.getResetPasswordToken()
+    await user.save()
+
+    const resetUrl = `http:localhost:3999/passwordreset/${resetToken}`
+    const message = `
+      <h1>You have requested a password reset</h1>
+      <p>Please go to the link to reset your password</p>
+      <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+    `
+    try {
+      // send the mail
+    } catch (error) {
+       
+    }
+  } catch (error) {
+    
+  }
+}
