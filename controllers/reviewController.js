@@ -9,7 +9,7 @@ module.exports.createReview = async (req, res) => {
     if(!newReview){
       res.status(401).json({msg: "review not found", data:null})
     }
-    review.author = req.user._id;
+    // review.author = req.user._id;
     product.reviews.push(newReview);
     await newReview.save();
     await product.save();

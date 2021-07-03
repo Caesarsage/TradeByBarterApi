@@ -2,16 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const ProductController = require("../controllers/productController");
- 
-const storage = multer.diskStorage({
- destination: (req, file, cb) => {
-   cb(null, "public/uploads/");
- },
- filename: (req, file, cb) => {
-   const ext = file.mimetype.split('/')[1];
-   cb(null, `${Date.now()}.${ext}`);
- },
-});
+ const { storage } = require("../cloudinary/index");
  
 const fileFilter = (req, file, cb) => {
  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
@@ -29,9 +20,9 @@ const upload = multer({
  fileFilter: fileFilter,
 });
  
-router.post("/", upload.single("productImage"), ProductController.createProduct);
+router.post("/", upload.single("image"), ProductController.createProduct);
  
-router.get("/show", ProductController.getProducts);
+router.get("/", ProductController.getProducts);
  
 module.exports = router;
  

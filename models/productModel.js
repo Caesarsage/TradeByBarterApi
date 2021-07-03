@@ -11,7 +11,8 @@ const productSchema = new Schema({
     required: true,
   },
   image: {
-    type: String,
+    url: String,
+    filename: String,
   },
   productLocation: {
     type: String,
@@ -24,12 +25,9 @@ const productSchema = new Schema({
   worth: {
     type: Number,
   },
-  location: {
-    type: String,
-  },
   category: {
-    type: Schema.Types.ObjectId,
-    ref: "Category",
+    type: String,
+    default: "uncategorized",
   },
   uploader: {
     type: Schema.Types.ObjectId,
