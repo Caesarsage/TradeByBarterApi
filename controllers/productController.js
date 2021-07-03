@@ -1,17 +1,22 @@
 const Product = require("../models/productModel");
  
 exports.createProduct = async (req, res, next) => {
+  const { filename, path } = req.file;
  try {
-   const newProduct = {    
+   const newProduct = {
      name: req.body.name,
      description: req.body.description,
-     image: req.file.image,
+     image: {
+       filename,
+       url: path,
+     },
      quantity: req.body.quantity,
-     productLocation: req.body.productLocation
- 
+     productLocation: req.body.productLocation,
+     worth: req.body.worth,
+     category: req.body.category,
    };
-   //const newProduct = await createProductObj(req);
    const product = await Product.create(newProduct);
+  //  product.uploader = req.user._id;
    return res.status(200).send({ message: "User created successfully!", product });
  } catch (error) {
    if (error.code === 11000) return res.status(200).send({ message: "product already exist" });
@@ -47,12 +52,3 @@ exports.getProducts = (req, res, next) => {
    });
 };
  
-const createProductObj = async (req) => {
- return {
-   name: req.body.name,
-   description: req.body.description,
-   image: req.file.image,
-   quantity: req.body.quantity,
-   productLocation: req.body.productLocation
- };
-}
