@@ -43,6 +43,7 @@ module.exports.checkIfAuthor = async (req, res, next)=>{
   try {
     const { id } = req.params;
     const products = await Product.findById(id);
+
     console.log(req.user);
     console.log(products.uploader);
     if (!products.uploader.equals(req.user.id)) {
