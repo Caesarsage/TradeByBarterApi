@@ -6,8 +6,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const sendMail = require("../utils/sendMail");
 
 module.exports.register = async (req, res, next) => {
-  const {firstName,lastName,email,phoneNumber,username,avatar,location,role,password,isAdmin} = req.body;
-  const { filename, path } = req.file;
+  const {firstName,lastName,email,phoneNumber,username,location,role,password,isAdmin} = req.body;
   try {
     // checking for email and username uniqueness
     const uniqueEmail = await User.findOne({ email });
@@ -22,15 +21,14 @@ module.exports.register = async (req, res, next) => {
       username,
       email,
       phoneNumber,
-      avatar: {
-        filename,
-        url: path,
-      },
       location,
       role,
       isAdmin,
       password,
     });
+    user.avatar.filename =  "TradeByBarter/avatar_b0c8xr",
+    user.avatar.url=  "https://res.cloudinary.com/dyf57wefu/image/upload/v1625652359/TradeByBarter/avatar_b0c8xr.png"
+
 
     // create a token
     const token = await jwt.sign(
