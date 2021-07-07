@@ -18,7 +18,10 @@ db();
 app.use(express.json())
 
 app.get('/', (req,res,next)=>{
-  res.send('Welcome to EazySwap documentation api')
+  res.send(
+    `Welcome to EazySwap documentation api. <br/>
+     check out <a href="https://github.com/zuri-training/Trade-by-Barter-pjt-09-be#readme">Api docs</a> for full documentation`
+  );
 })
 
 // router middleware

@@ -6,8 +6,9 @@
 + OPEN SOURCE: Refer to the contributing.md file to see how to contribute to this codebase
 ```
 
-### Heroku link
-<a href=""></a>
+### Heroku BASE URL link
+
+<a href="https://zuri-team9.herokuapp.com/">https://zuri-team9.herokuapp.com/</a>
 ### Response Form
 { msg: String, data: < Data Object> }
 
@@ -86,7 +87,7 @@
 </p>
 <ul>
   <li>URL <br/>
-  /api/auth/register
+  https://zuri-team9.herokuapp.com/api/auth/register
   </li>
   <li>Method  <br/>
  
@@ -178,7 +179,7 @@
 </p>
 <ul>
   <li>URL <br/>
-  /api/auth/login
+  https://zuri-team9.herokuapp.com/api/auth/login
   </li>
   <li>Method  <br/>
  
@@ -246,7 +247,7 @@
 </p>
 <ul>
   <li>URL <br/>
-  api/auth/forget
+  https://zuri-team9.herokuapp.com/api/auth/forget
   </li>
   <li>Method  <br/>
  
@@ -312,7 +313,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/user
+ https://zuri-team9.herokuapp.com/api/user
 </li>
 <li>Method  <br/>
  
@@ -359,7 +360,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/user/:id
+ https://zuri-team9.herokuapp.com/api/user/:id
 </li>
 <li>Method  <br/>
   
@@ -410,7 +411,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /
+ https://zuri-team9.herokuapp.com/api/user/:id
 </li>
 <li>Method  <br/>
   
@@ -497,7 +498,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/user/:id
+ https://zuri-team9.herokuapp.com/api/user/:id
 </li>
 <li>Method  <br/>
   
@@ -550,7 +551,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/products
+ https://zuri-team9.herokuapp.com/api/products
 </li>
 <li>Method  <br/>
   
@@ -626,7 +627,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/products
+ https://zuri-team9.herokuapp.com/api/products
 </li>
 <li>Method  <br/>
  
@@ -672,7 +673,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/products
+https://zuri-team9.herokuapp.com/api/products
 </li>
 <li>Method  <br/>
   
@@ -754,7 +755,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/products/:id
+ https://zuri-team9.herokuapp.com/api/products/:id
 </li>
 <li>Method  <br/>
   
@@ -806,7 +807,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/products?<query>
+ https://zuri-team9.herokuapp.com/api/products?<query>
 </li>
 <li>Method  <br/>
   
@@ -859,7 +860,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/products/:id/reviews
+ https://zuri-team9.herokuapp.com/api/products/:id/reviews
 </li>
 <li>Method  <br/>
   
@@ -913,7 +914,7 @@
 </p>
 <ul>
 <li>URL <br/>
- /api/products/:id/reviews/:reviewId
+ https://zuri-team9.herokuapp.com/api/products/:id/reviews/:reviewId
 </li>
 <li>Method  <br/>
   
