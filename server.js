@@ -9,13 +9,17 @@ const productRouter = require("./routes/productRoute");
 const errorHandler = require("./middlewares/error");
 const ErrorResponse = require("./utils/errorResponse");
 const userRouter = require("./routes/userRoutes");
-
+const fs = require("fs")
 const app = express();
 
 // connecting to BD
 db();
 
 app.use(express.json())
+
+app.get('/', (req,res,next)=>{
+  res.send('Welcome to EazySwap documentation api')
+})
 
 // router middleware
 app.use('/api/auth', authRouter);
