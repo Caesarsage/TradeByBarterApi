@@ -2,7 +2,10 @@
 
 <p>This is the backend documentation for how to consume the api </br>
 
-<b>OPEN SOURCE: Refer to the contributing.md to see how to contribute to this codebase</b>
+```diff
++ OPEN SOURCE: Refer to the contributing.md file to see how to contribute to this codebase
+```
+
 ### Heroku link
 <a href=""></a>
 ### Response Form
@@ -27,7 +30,8 @@
   <li>
     <a href="#retrieve">Retrieve Password</a>
   </li>
-  <em>User(s)</em>
+  
+  <header>User(s)</header>
   <li>
     <a href="#get_users">Get Users</a>
   </li>
@@ -35,7 +39,7 @@
     <a href="#get_user">Get a User</a>
   </li>
   <li>
-    <a href="#edit_user">Edit a User</a>
+    <a href="#update_user">Edit and Update a User</a>
   </li>
   <li>
     <a href="#delete_user">Delete a User</a>
@@ -617,7 +621,7 @@
 
 
 ## SHOW ALL PRODUCT
-<p id="all_product">
+<p id="get_all_products">
   Returns json object of all data created
 </p>
 <ul>
