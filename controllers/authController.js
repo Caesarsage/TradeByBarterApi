@@ -6,8 +6,8 @@ const ErrorResponse = require("../utils/errorResponse");
 const sendMail = require("../utils/sendMail");
 
 module.exports.register = async (req, res, next) => {
-  const {
-    firstName,lastName,email,phoneNumber,username,avatar,location,role,password,isAdmin} = req.body;
+  const {firstName,lastName,email,phoneNumber,username,avatar,location,role,password,isAdmin} = req.body;
+  const { filename, path } = req.file;
   try {
     // checking for email and username uniqueness
     const uniqueEmail = await User.findOne({ email });
@@ -22,7 +22,10 @@ module.exports.register = async (req, res, next) => {
       username,
       email,
       phoneNumber,
-      avatar,
+      avatar: {
+        filename,
+        url: path,
+      },
       location,
       role,
       isAdmin,

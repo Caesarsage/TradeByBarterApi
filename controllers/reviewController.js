@@ -3,13 +3,17 @@ const Review = require("../models/reviewModel");
 
 
 module.exports.createReview = async (req, res) => {
+  const {body, rating, author} = req.body
   try {
     const product = await Product.findById(req.params.id);
-    const newReview = new Review(req.body.review);
+    const newReview = new Review({
+      body,
+      rating,
+      author: req.user.id
+    });
     if(!newReview){
       res.status(401).json({msg: "review not found", data:null})
     }
-    // review.author = req.user._id;
     product.reviews.push(newReview);
     await newReview.save();
     await product.save();
@@ -22,8 +26,9 @@ module.exports.createReview = async (req, res) => {
 module.exports.deleteReview = async (req, res) => {
   try {
     const { id, reviewId } = req.params;
-    await Product.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
+    const product = await Product.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    const review = await Review.findByIdAndDelete(reviewId);
+  if(review) res.status(200).json({msg:'successful', data:review})    
   } catch (error) {
     res.status(500).json({ msg: "error occur!!!", data: error });
   }

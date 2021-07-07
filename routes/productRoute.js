@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const ProductController = require("../controllers/productController");
  const { storage } = require("../cloudinary/index");
+const { authenticateUser, checkIfAuthor, checkIfAdmin } = require("../middlewares/auth");
  
 const fileFilter = (req, file, cb) => {
  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
@@ -20,9 +21,19 @@ const upload = multer({
  fileFilter: fileFilter,
 });
  
-router.post("/", upload.single("image"), ProductController.createProduct);
+router.post("/", upload.single("image"), authenticateUser, ProductController.createProduct);
  
 router.get("/", ProductController.getProducts);
  
+router
+  .route("/:id")
+  .put(
+    authenticateUser,
+    checkIfAuthor,
+    checkIfAdmin,
+    upload.single("image"),
+    ProductController.updateProduct
+  )
+  .delete(authenticateUser, checkIfAuthor, ProductController.deleteProduct);
 module.exports = router;
  

@@ -1,11 +1,8 @@
 const express = require("express");
-const {
-  showUser,
-  editUser,
-  getAllUser,
-} = require("../controllers/userController");
+const { showUser, editUser, getAllUser} = require("../controllers/userController");
 const multer = require("multer");
 const { storage } = require("../cloudinary/index");
+const {authenticateUser, checkIfAdmin} = require("../middlewares/auth")
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
@@ -25,10 +22,10 @@ const upload = multer({
 
 const userRouter = express.Router();
 
-userRouter.get("/:id", showUser);
+userRouter.get("/:id", authenticateUser, showUser);
 
-userRouter.put("/:id", upload.single('image'), editUser);
+userRouter.put("/:id", upload.single('image'), authenticateUser, editUser);
 
-userRouter.get("/", getAllUser)
+userRouter.get("/", authenticateUser, checkIfAdmin, getAllUser);
 
 module.exports = userRouter;

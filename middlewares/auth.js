@@ -1,12 +1,14 @@
-import ErrorResponse from "../utils/errorResponse";
+const ErrorResponse = require("../utils/errorResponse");
 
 const jwt = require("jsonwebtoken");
+const Product = require("../models/productModel");
+const User = require("../models/userModel");
 
 module.exports.authenticateUser = async (req, res, next) => {
   try {
     // check if there is an authorization token
     if (!req.headers.authorization) {
-      return next(new ErrorResponse("authorization header required", 401));
+      return next(new ErrorResponse("authorization header required, please login", 401));
     }
     let splittedHeader = await req.headers.authorization.split(" ");
     if (splittedHeader[0] !== "Bearer") {
@@ -25,7 +27,7 @@ module.exports.authenticateUser = async (req, res, next) => {
   }
 };
 
-export const checkIfAdmin = async (req, res, next) => {
+module.exports.checkIfAdmin = async (req, res, next) => {
   try {
     if (!req.user.isAdmin) {
       return next( new ErrorResponse("Protected Route, admin only", 403))
@@ -33,5 +35,36 @@ export const checkIfAdmin = async (req, res, next) => {
     return next();
   } catch (error) {
     next(error)
+  }
+};
+
+
+module.exports.checkIfAuthor = async (req, res, next)=>{
+  try {
+    const { id } = req.params;
+    const products = await Product.findById(id);
+    console.log(req.user);
+    console.log(products.uploader);
+    if (!products.uploader.equals(req.user.id)) {
+      return next (new ErrorResponse('You do not have permission to do that!', 403))
+    }
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports.checkIfReviewAuthor = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user.id.equals(req.user.id)) {
+      return next(
+        new ErrorResponse("You do not have permission to do that!", 403)
+      );
+    }
+    next();
+  } catch (error) {
+    next(error);
   }
 };

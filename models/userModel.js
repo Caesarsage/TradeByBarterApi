@@ -31,8 +31,8 @@ const userSchema = new Schema({
     min: [7, "number must not start with 0 and less than 7 digit"],
   },
   avatar: {
-    type: String,
-    default: "",
+    url: String,
+    filename: String,
   },
   location: {
     type: String,

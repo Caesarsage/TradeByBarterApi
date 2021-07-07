@@ -23,7 +23,7 @@ const productSchema = new Schema({
     required: true,
   },
   worth: {
-    type: Number,
+    type: String,
   },
   category: {
     type: String,
