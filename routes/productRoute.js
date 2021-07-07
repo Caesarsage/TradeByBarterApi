@@ -30,7 +30,6 @@ router
   .put(
     authenticateUser,
     checkIfAuthor,
-    checkIfAdmin,
     upload.single("image"),
     ProductController.updateProduct
   )
