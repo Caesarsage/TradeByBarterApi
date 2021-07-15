@@ -27,7 +27,7 @@ router.get("/", ProductController.getProducts);
  
 router
   .route("/:id")
-  .get(checkIfAdmin, authenticateUser, ProductController.getSingleProduct)
+  .get( authenticateUser,checkIfAdmin, ProductController.getSingleProduct)
   .put(
     authenticateUser,
     checkIfAuthor,
