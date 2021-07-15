@@ -58,7 +58,7 @@
     <a href="#get_all_products">Get all Product</a>
   </li>
    <li>
-    <a href="#show_product">Get a particular product</a>
+    <a href="#one_product">Get a particular product</a>
   </li>
    <li>
     <a href="#update_product">Update Product</a>
@@ -668,7 +668,7 @@
 </ul>
 
 ## GET ONE PRODUCT
-<p id="update_product">
+<p id="one_product">
   Returns json object of single data 
 </p>
 <ul>
