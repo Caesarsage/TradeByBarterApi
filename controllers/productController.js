@@ -57,6 +57,18 @@ exports.deleteProduct = async (req, res, next) => {
   }
 }
 
+exports.getSingleProduct = async (req,res,next)=>{
+  try {
+    const {id}= req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+      return next(new ErrorResponse("product not found", 404));
+    }
+    res.status(200).json({msg: 'successful', data: product})
+  } catch (error) {
+    next(error)
+  }
+}
 
 exports.getProducts = async (req, res, next) => {
   const { page = 1, limit = 20, name } = req.query;

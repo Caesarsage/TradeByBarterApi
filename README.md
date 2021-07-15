@@ -667,6 +667,62 @@
 </li>
 </ul>
 
+## GET ONE PRODUCT
+<p id="update_product">
+  Returns json object of single data 
+</p>
+<ul>
+<li>URL <br/>
+https://zuri-team9.herokuapp.com/api/products/:id
+</li>
+<li>Method  <br/>
+  
+  ```
+  GET
+  ```
+</li>
+<li>URL Params  <br/>
+  <strong>Required</strong>
+  
+  ```
+  id=[integer]
+  ```
+</li>
+<li>Data Params  <br/>
+ 
+ ```
+  none
+  
+  ```
+</li>
+
+<li>Success Response  <br/>
+  <ul><li>Code: 200</li></ul>
+  
+  ```
+    {
+      "msg": "successfully",
+      "data": product <Object>
+    }
+  
+  ```
+
+</li>
+
+<li>Error Response
+  <ul><li>Code: 404</li></ul>
+  
+```
+    {
+      "msg": "an error occur, failed to update",
+      "data": error
+    }
+ 
+```
+  </li>
+</ul>
+
+
 ## UPDATE PRODUCT
 <p id="update_product">
   Returns json object of the data updated

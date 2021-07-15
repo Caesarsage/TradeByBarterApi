@@ -26,7 +26,8 @@ router.post("/", upload.single("image"), authenticateUser, ProductController.cre
 router.get("/", ProductController.getProducts);
  
 router
-  .route("/:id")
+  .route( checkIfAdmin, authenticateUser,"/:id")
+  .get(ProductController.getSingleProduct)
   .put(
     authenticateUser,
     checkIfAuthor,
@@ -34,5 +35,5 @@ router
     ProductController.updateProduct
   )
   .delete(authenticateUser, checkIfAuthor, ProductController.deleteProduct);
+
 module.exports = router;
- 
