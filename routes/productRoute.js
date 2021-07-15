@@ -26,8 +26,8 @@ router.post("/", upload.single("image"), authenticateUser, ProductController.cre
 router.get("/", ProductController.getProducts);
  
 router
-  .route( checkIfAdmin, authenticateUser,"/:id")
-  .get(ProductController.getSingleProduct)
+  .route("/:id")
+  .get(checkIfAdmin, authenticateUser, ProductController.getSingleProduct)
   .put(
     authenticateUser,
     checkIfAuthor,
