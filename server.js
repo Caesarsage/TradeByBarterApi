@@ -9,12 +9,14 @@ const productRouter = require("./routes/productRoute");
 const errorHandler = require("./middlewares/error");
 const ErrorResponse = require("./utils/errorResponse");
 const userRouter = require("./routes/userRoutes");
+const cors = require('cors')
 const fs = require("fs")
 const app = express();
 
 // connecting to BD
 db();
 
+app.use(cors())
 app.use(express.json())
 
 app.get('/', (req,res,next)=>{
