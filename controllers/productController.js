@@ -60,7 +60,7 @@ exports.deleteProduct = async (req, res, next) => {
 exports.getSingleProduct = async (req,res,next)=>{
   try {
     const {id}= req.params;
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).populate("uploader");
     if (!product) {
       return next(new ErrorResponse("product not found", 404));
     }
@@ -72,7 +72,6 @@ exports.getSingleProduct = async (req,res,next)=>{
 
 exports.getProducts = async (req, res, next) => {
   const { page = 1, limit = 20, name } = req.query;
-  // console.log(req.query);
   try{
   let s = "";
   if (name) {
